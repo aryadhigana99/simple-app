@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.example.mys.other.AccountType;
+
 @Entity
 @Table(name="account")
 public class Account implements Serializable {
@@ -15,6 +17,8 @@ public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(allocationSize = 1, name = "account_account_id_seq", sequenceName = "account_account_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_account_id_seq")
 	@Column(name="account_id", nullable=false)
 	private Long accountId;
 	
@@ -40,9 +44,14 @@ public class Account implements Serializable {
 	@Column(nullable = false)
 	private Integer age;
 
-	@Column(name="account_type", nullable = false)
-	private AccessType accountType;
+	@Column(name="account_type",nullable=true)
+	private AccountType accountType;
 	
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getAccountId() {
 		return accountId;
 	}
@@ -99,12 +108,12 @@ public class Account implements Serializable {
 		this.deviceId = deviceId;
 	}
 
-	public AccessType getAccountType() {
+	public AccountType getAccountType() {
 		return accountType;
 	}
 
-	public void setAccountType(AccessType accountType) {
+	public void setAccountType(AccountType accountType) {
 		this.accountType = accountType;
 	}
-	
+
 }

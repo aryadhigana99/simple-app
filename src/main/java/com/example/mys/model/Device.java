@@ -23,7 +23,7 @@ public class Device implements Serializable{
 	@SequenceGenerator(allocationSize = 1, name = "device_device_id_seq", sequenceName = "device_device_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "device_device_id_seq")
 	@Column(name="device_id",nullable = false)
-	private Long device_id;
+	private Long deviceId;
 	
 	@Column(name="phone_number",nullable = false)
 	private String phoneNumber;
@@ -33,13 +33,18 @@ public class Device implements Serializable{
 	
 	@Column
 	private String imei;
-
-	public Long getDevice_id() {
-		return device_id;
+	
+	public Device() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setDevice_id(Long device_id) {
-		this.device_id = device_id;
+	public Long getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(Long deviceId) {
+		this.deviceId = deviceId;
 	}
 
 	public String getPhoneNumber() {

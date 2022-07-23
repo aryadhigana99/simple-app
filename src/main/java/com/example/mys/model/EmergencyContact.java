@@ -41,6 +41,12 @@ public class EmergencyContact implements Serializable {
 	
 	@Column
 	private String relation;
+	
+
+	public EmergencyContact() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getEmergencyContactId() {
 		return emergencyContactId;

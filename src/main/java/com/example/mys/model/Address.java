@@ -31,6 +31,11 @@ public class Address implements Serializable {
 	@Column(name="postal_code",nullable = false)
 	private String postalCode;
 
+	public Address() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getAddressId() {
 		return addressId;
 	}

@@ -16,6 +16,8 @@ public class Loan implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(allocationSize = 1, name = "loan_loan_id_seq", sequenceName = "loan_loan_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "loan_loan_id_seq")
 	@Column(name="loan_id",nullable = false)
 	private Long loanId;
 	
@@ -38,6 +40,11 @@ public class Loan implements Serializable{
 	
 	@Column(name="pay_back")
 	private BigDecimal payBack;
+	
+	public Loan() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public Long getLoanId() {
 		return loanId;
