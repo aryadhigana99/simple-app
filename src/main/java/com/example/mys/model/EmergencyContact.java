@@ -29,9 +29,8 @@ public class EmergencyContact implements Serializable {
 	@Column(name="emergency_contact_id",nullable = false)
 	private Long emergencyContactId;
 	
-	@OneToOne(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="account_id", referencedColumnName = "account_id")
-	@Column(nullable = false)
 	private Account accountId;
 	
 	@Column(name="phone_number")

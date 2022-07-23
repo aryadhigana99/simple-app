@@ -21,14 +21,12 @@ public class Account implements Serializable {
 	@Column(nullable = false)
 	private String name;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="address_id", referencedColumnName = "address_id")
-	@Column(nullable = false)
 	private Address address;
 	
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="device_id", referencedColumnName = "device_id")
-	@Column(nullable = false)
 	private Device deviceId;
 	
 	@Temporal(TemporalType.TIMESTAMP)
