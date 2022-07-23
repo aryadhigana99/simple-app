@@ -18,11 +18,18 @@ public class Account implements Serializable {
 	@Column(name="account_id", nullable=false)
 	private Long accountId;
 	
-	@Column
+	@Column(nullable = false)
 	private String name;
 	
-	@Column
-	private String address;
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="address_id", referencedColumnName = "address_id")
+	@Column(nullable = false)
+	private Address address;
+	
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="device_id", referencedColumnName = "device_id")
+	@Column(nullable = false)
+	private Device deviceId;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="create_on")
@@ -35,6 +42,9 @@ public class Account implements Serializable {
 	@Column(nullable = false)
 	private Integer age;
 
+	@Column(name="account_type", nullable = false)
+	private AccessType accountType;
+	
 	public Long getAccountId() {
 		return accountId;
 	}
@@ -49,14 +59,6 @@ public class Account implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public Date getCreateOn() {
@@ -82,7 +84,29 @@ public class Account implements Serializable {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	
-	
 
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Device getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(Device deviceId) {
+		this.deviceId = deviceId;
+	}
+
+	public AccessType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccessType accountType) {
+		this.accountType = accountType;
+	}
+	
 }
