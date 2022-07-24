@@ -27,7 +27,7 @@ public class Loan implements Serializable{
 	
 	
 	@Column(name="loan_amount", nullable = false)
-	private Long loanAmount;
+	private BigDecimal loanAmount;
 	
 	@Column(name="type_loan")
 	private String typeLoan;
@@ -38,8 +38,32 @@ public class Loan implements Serializable{
 	@Column(name="interest")
 	private BigDecimal interest;
 	
-	@Column(name="pay_back")
-	private BigDecimal payBack;
+	@Column(name="total_loan")
+	private BigDecimal totalLoan;
+	
+	@Column
+	private BigDecimal payment = new BigDecimal("0");
+	
+	@Column
+	private String status;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="loan_date")
+	private Date loanDate = new Date();
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="create_on")
+	private Date createOn = new Date();
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="change_on")
+	private Date changeOn;
+	
+	@Column(name="create_by")
+	private String createBy;
+	
+	@Column(name="change_by")
+	private String changeBy;
 	
 	public Loan() {
 		super();
@@ -54,11 +78,19 @@ public class Loan implements Serializable{
 		this.loanId = loanId;
 	}
 
-	public Long getLoanAmount() {
+	public Account getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(Account accountId) {
+		this.accountId = accountId;
+	}
+
+	public BigDecimal getLoanAmount() {
 		return loanAmount;
 	}
 
-	public void setLoanAmount(Long loanAmount) {
+	public void setLoanAmount(BigDecimal loanAmount) {
 		this.loanAmount = loanAmount;
 	}
 
@@ -86,13 +118,71 @@ public class Loan implements Serializable{
 		this.interest = interest;
 	}
 
-	public BigDecimal getPayBack() {
-		return payBack;
+	public BigDecimal getTotalLoan() {
+		return totalLoan;
 	}
 
-	public void setPayBack(BigDecimal payBack) {
-		this.payBack = payBack;
+	public void setTotalLoan(BigDecimal totalLoan) {
+		this.totalLoan = totalLoan;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Date getLoanDate() {
+		return loanDate;
+	}
+
+	public void setLoanDate(Date loanDate) {
+		this.loanDate = loanDate;
+	}
+
+	public Date getCreateOn() {
+		return createOn;
+	}
+
+	public void setCreateOn(Date createOn) {
+		this.createOn = createOn;
+	}
+
+	public Date getChangeOn() {
+		return changeOn;
+	}
+
+	public void setChangeOn(Date changeOn) {
+		this.changeOn = changeOn;
+	}
+
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public String getChangeBy() {
+		return changeBy;
+	}
+
+	public void setChangeBy(String changeBy) {
+		this.changeBy = changeBy;
+	}
+
+	public BigDecimal getPayment() {
+		return payment;
+	}
+
+	public void setPayment(BigDecimal payment) {
+		this.payment = payment;
+	}
+	
+	
 	
 	
 	

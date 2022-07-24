@@ -13,10 +13,13 @@ public class RequestResponse implements Serializable{
 	
 	String message;
 	
+	Object object;
 
-	public RequestResponse(String code, String message) {
+	public RequestResponse(String code, String message, Object object) {
+		super();
 		this.code = code;
 		this.message = message;
+		this.object = object;
 	}
 
 	public String getCode() {
@@ -35,5 +38,12 @@ public class RequestResponse implements Serializable{
 		this.message = message;
 	}
 
+	public Object getObject() {
+		return object;
+	}
 
+	public void setObject(Object object) {
+		this.object = object;
+	}
+	
 }

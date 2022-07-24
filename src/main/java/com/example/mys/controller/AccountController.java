@@ -1,26 +1,20 @@
 package com.example.mys.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.mys.other.AccountRequest;
 import com.example.mys.other.AddressRequest;
 import com.example.mys.other.DeviceRequest;
+import com.example.mys.other.EmergencyContactRequest;
 import com.example.mys.other.RequestResponse;
-import com.example.mys.repository.AccountRepository;
 import com.example.mys.service.AccountService;
-import com.example.mys.util.HttpUtil;
 
 
 @RestController
@@ -41,7 +35,7 @@ public class AccountController {
 			return accountService.saveAccount(accountRequest);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(new RequestResponse("500", e.toString()),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 	}
@@ -53,7 +47,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return new ResponseEntity<>(new RequestResponse("500", e.toString()),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -64,7 +58,17 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return new ResponseEntity<>(new RequestResponse("500", e.toString()),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping("/emgc")
+	public ResponseEntity<RequestResponse> addEmergencyContact(@RequestBody EmergencyContactRequest request) throws Exception{
+		try {
+			return accountService.addEmergencyContact(request);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

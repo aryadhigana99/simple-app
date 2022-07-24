@@ -15,14 +15,17 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.mys.model.Account;
 import com.example.mys.model.Address;
 import com.example.mys.model.Device;
+import com.example.mys.model.EmergencyContact;
 import com.example.mys.other.AccountRequest;
 import com.example.mys.other.AccountType;
 import com.example.mys.other.AddressRequest;
 import com.example.mys.other.DeviceRequest;
+import com.example.mys.other.EmergencyContactRequest;
 import com.example.mys.other.RequestResponse;
 import com.example.mys.repository.AccountRepository;
 import com.example.mys.repository.AddressRepository;
 import com.example.mys.repository.DeviceRepository;
+import com.example.mys.repository.EmergencyContactRepository;
 import com.example.mys.service.AccountService;
 
 @Service
@@ -36,6 +39,9 @@ public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
 	private DeviceRepository deviceRepository;
+	
+	@Autowired
+	private EmergencyContactRepository emergencyContactRepository;
 	
 //	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -55,13 +61,13 @@ public class AccountServiceImpl implements AccountService {
 			
 			accountRepository.save(account);
 			
-			return new ResponseEntity<>(new RequestResponse("200", "OK"), HttpStatus.CREATED);
+			return new ResponseEntity<>(new RequestResponse("200", "OK",null), HttpStatus.CREATED);
 			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return new ResponseEntity<>(new RequestResponse("500", e.toString()), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -80,12 +86,12 @@ public class AccountServiceImpl implements AccountService {
 			addressRepository.save(address);
 			account.get().setAddress(address);
 			accountRepository.save(account.get());
-			return new ResponseEntity<>(new RequestResponse("200", "OK"), HttpStatus.CREATED);
+			return new ResponseEntity<>(new RequestResponse("200", "OK",null), HttpStatus.CREATED);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return new ResponseEntity<>(new RequestResponse("500", e.toString()), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null), HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		}
 	}
@@ -104,12 +110,35 @@ public class AccountServiceImpl implements AccountService {
 			deviceRepository.save(device);
 			account.get().setDeviceId(device);
 			accountRepository.save(account.get());
-			return new ResponseEntity<>(new RequestResponse("200", "OK"), HttpStatus.CREATED);
+			return new ResponseEntity<>(new RequestResponse("200", "OK",null), HttpStatus.CREATED);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return new ResponseEntity<>(new RequestResponse("500", e.toString()), HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null), HttpStatus.INTERNAL_SERVER_ERROR);
+		
+		}
+	}
+
+	@Override
+	public ResponseEntity<RequestResponse> addEmergencyContact(EmergencyContactRequest request) throws Exception {
+		try {
+			Optional<Account> account = accountRepository.findById(request.getAccountId());
+
+			EmergencyContact emergencyContact = new EmergencyContact();
+			
+			emergencyContact.setAccountId(account.get());
+			emergencyContact.setName(request.getName());
+			emergencyContact.setPhoneNumber(request.getPhoneNumber());
+			emergencyContact.setRelation(request.getRelation());
+			
+			emergencyContactRepository.save(emergencyContact);
+			return new ResponseEntity<>(new RequestResponse("200", "OK",null), HttpStatus.CREATED);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null), HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		}
 	}
