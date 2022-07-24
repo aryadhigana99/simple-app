@@ -14,5 +14,6 @@ public interface LoanService {
 	public ResponseEntity<RequestResponse> saveLoan(LoanRequest loanRequest) throws Exception;
 	public ResponseEntity<RequestResponse> savePayment(PaymentRequest paymentRequest) throws Exception;
 	public ResponseEntity<RequestResponse> checkLoanOpen(Date today,String status) throws Exception;
+	public ResponseEntity<RequestResponse> rejectLoan(Long loanId) throws Exception;
 
 }

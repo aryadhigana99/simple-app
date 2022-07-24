@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.example.mys.model.Loan;
 
 @Repository
-public interface LoanRepository extends JpaRepository<Loan, Long>, LoanRepositoryCustom, JpaSpecificationExecutor<Loan>{
+public interface LoanRepository extends JpaRepository<Loan, Long>, LoanRepositoryCustom{
 
 }

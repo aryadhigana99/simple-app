@@ -1,6 +1,9 @@
 package com.example.mys.service.impl;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.persistence.AccessType;
 
@@ -12,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.mys.dto.EmergencyContactDTO;
 import com.example.mys.model.Account;
 import com.example.mys.model.Address;
 import com.example.mys.model.Device;
@@ -139,7 +143,26 @@ public class AccountServiceImpl implements AccountService {
 			// TODO: handle exception
 			e.printStackTrace();
 			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null), HttpStatus.INTERNAL_SERVER_ERROR);
-		
+		}
+	}
+
+	@Override
+	public ResponseEntity<RequestResponse> findEmergencyContact(Long accountId) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			List<EmergencyContactDTO> contacts = emergencyContactRepository.listEmergencyContact(accountId);
+			
+			List<EmergencyContactDTO> sorted = contacts.stream()
+					.sorted(Comparator.comparing(EmergencyContactDTO::getId).reversed())
+					.collect(Collectors.toList());
+			
+			sorted.forEach(System.out::println);
+			List<EmergencyContactDTO> response = sorted;
+			
+			return new ResponseEntity<>(new RequestResponse("200","OK",response), HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

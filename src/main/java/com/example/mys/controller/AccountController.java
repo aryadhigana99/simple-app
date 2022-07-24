@@ -3,6 +3,8 @@ package com.example.mys.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,6 +74,15 @@ public class AccountController {
 		}
 	}
 	
+	@GetMapping("/ec-get/{accountId}")
+	public ResponseEntity<RequestResponse> checkEmergencyContact(@PathVariable Long accountId){
+		try {
+			return accountService.findEmergencyContact(accountId);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 //	@GetMapping
 //	public String check(@RequestParam(name = "str", defaultValue = "",required = false) String str) {
 //		

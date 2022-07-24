@@ -91,20 +91,31 @@ public class LoanServiceImpl implements LoanService{
 		try {
 			List<LoanDTO> response = loanRepository.loanList(today,status);
 			
-//			for(LoanDTO a : loanList) {
-//				System.out.println(a.getName());
-//			}
-//			
-//			List<LoanDTO> sorted = loanList.stream().sorted(Comparator.comparing(LoanDTO::getId))
-//			.collect(Collectors.toList());
 			return new ResponseEntity<>(new RequestResponse("200","OK",response), HttpStatus.INTERNAL_SERVER_ERROR);
-//			System.out.println(loanList.toString());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 //		return null;
+	}
+
+	@Override
+	public ResponseEntity<RequestResponse> rejectLoan(Long loanId) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			Optional<Loan> loan = loanRepository.findById(loanId);
+			
+			loan.get().setStatus("REJECT");
+			loan.get().setChangeBy("SYSTEM");
+			loan.get().setChangeOn(new Date());
+			
+			loanRepository.save(loan.get());
+			return new ResponseEntity<>(new RequestResponse("200", "OK",null), HttpStatus.CREATED);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 }

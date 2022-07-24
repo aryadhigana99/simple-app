@@ -61,5 +61,16 @@ public class LoanController {
 		}
 	}
 	
+	@PutMapping("reject/{loanId}")
+	public ResponseEntity<RequestResponse> rejectLoan(@PathVariable Long loanId)
+	{
+		try {
+			return loanService.rejectLoan(loanId);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return new ResponseEntity<>(new RequestResponse("500", e.toString(),null),HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 
 }

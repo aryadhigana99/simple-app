@@ -14,5 +14,6 @@ public interface AccountService {
 	public ResponseEntity<RequestResponse> updateAddress(AddressRequest addressRequest) throws Exception;
 	public ResponseEntity<RequestResponse> updateDevice(DeviceRequest deviceRequest) throws Exception;
 	public ResponseEntity<RequestResponse> addEmergencyContact(EmergencyContactRequest request) throws Exception;
+	public ResponseEntity<RequestResponse> findEmergencyContact(Long accountId) throws Exception;
 }
 	
