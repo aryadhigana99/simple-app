@@ -61,6 +61,11 @@ public class LoanController {
 		}
 	}
 	
+	@GetMapping("/hello/{name}")
+	public String helloWorld(@PathVariable String name) {
+		return "<h1> Hello, "+name+"</h1>";
+	}
+	
 	@PutMapping("reject/{loanId}")
 	public ResponseEntity<RequestResponse> rejectLoan(@PathVariable Long loanId)
 	{
