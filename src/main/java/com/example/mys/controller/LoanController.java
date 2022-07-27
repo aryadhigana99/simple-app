@@ -63,6 +63,15 @@ public class LoanController {
 	
 	@GetMapping("/hello/{name}")
 	public String helloWorld(@PathVariable String name) {
+		if (name.equalsIgnoreCase("ary")) {
+			name = "king "+name;
+		} else {
+			int count =0;
+			for(int i=0;i<=name.length();i++) {
+				count += 1;
+			}
+			name = "count "+name;
+		}
 		return "<h1> Hello, "+name+"</h1>";
 	}
 	
