@@ -8,6 +8,7 @@ class MySimpleAppApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Hellow World-1");
 	}
 
 }
