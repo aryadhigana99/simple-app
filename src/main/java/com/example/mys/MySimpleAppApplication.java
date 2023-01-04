@@ -11,7 +11,7 @@ public class MySimpleAppApplication {
 
 	@RequestMapping(value="/")
 	public String coba() {
-		return "<h1> Hello World </h1>";
+		return "<h1> Hello World 1 </h1>";
 	}
 //	
 //	@RequestMapping(value="/hello2")
